@@ -166,24 +166,22 @@ const Checkout = () => {
                         <div class="card checkout-card">
                             <div class="card-body">
                                 <h6 class="card-title">Home</h6>
-                                <p class="card-text">Baramati</p>
+                                <p class="card-text">{user.address}</p>
 
                             </div>
                         </div>
                     </div>
 
                     <div className='col-lg-6 col-md-3 col-sm-12 mt-4  mb-4'>
-
                         <div class="card checkout-card">
                             <div class="card-body">
                                 <h6 class="card-title">Contact Number</h6>
-                                <p class="card-text">9146891354</p>
+                                <p class="card-text">{user. mob_no}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div className='container-fluid mt-5' style={{ backgroundColor: '#D3D3D3' }}>
                 <div className='row'>
                     <h4 style={{ fontWeight: 'bold' }}>Payment Option</h4>
@@ -197,7 +195,7 @@ const Checkout = () => {
                             <div className="card-body mt-2">
                                 <input type='radio'></input>
                                 <label className='ps-2'>Cash On Delivery</label>
-                                <p className='ps-4' style={{ fontWeight: 'bold', fontSize: '20px' }}>&#8377;<span style={{ fontWeight: 'bold' }}>2528</span></p>
+                                <p className='ps-4' style={{ fontWeight: 'bold', fontSize: '20px' }}>&#8377;<span style={{ fontWeight: 'bold' }}>{subtotal.toFixed(2)}</span></p>
                             </div>
                         </div>
                     </div>
@@ -206,7 +204,7 @@ const Checkout = () => {
                             <div className="card-body mt-2">
                                 <input type='radio'></input>
                                 <label className='ps-2'>Online Transfer</label>
-                                <p className='ps-4' style={{ fontWeight: 'bold', fontSize: '20px' }}>&#8377;<span style={{ fontWeight: 'bold' }}> 2528</span></p>
+                                <p className='ps-4' style={{ fontWeight: 'bold', fontSize: '20px' }}>&#8377;<span style={{ fontWeight: 'bold' }}>{subtotal.toFixed(2)}</span></p>
                             </div>
                         </div>
                     </div>
@@ -230,21 +228,17 @@ const Checkout = () => {
                     </div>
                 </div>
             </div>
-
             <div className='container-fluid' style={{marginTop:'90px'}}>
                 <div className='row'>
                     <div className='col-lg-12 col-md-6 col-sm-12'>
                         <input type='checkbox'></input>
                         <label className='ps-2'>By making this purchase you agree to our<a href='#' className='terms-con'>Terms and Conditions.</a></label>
                         <div class="d-grid gap-2 mt-3">
-                            <button class="btn checkout-btn" type="button">CONFIRM ORDER</button>
-                            
+                            <button class="btn checkout-btn" type="button">CONFIRM ORDER</button>                         
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </>
     )
 }

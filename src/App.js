@@ -16,6 +16,7 @@ import Showmore2 from './Website/MainComponent/Pages/Showmore2';
 import Brandshow from './Website/MainComponent/Pages/Brandshow';
 import Search from './Website/MainComponent/Pages/Search';
 import Checkout from './Website/MainComponent/Pages/Checkout';
+import Myorder from './Website/MainComponent/Pages/Myorder';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
       <Route path='/brandshow' element={<Master Comp={Brandshow}></Master>}></Route>
       <Route path='/search' element={<Master Comp={Search}></Master>}></Route>
       <Route path='/checkout' element={<Master Comp={Checkout}></Master>}></Route>
+      <Route path='/myorder' element={<Master Comp={Myorder}></Master>}></Route>
      </Routes>
      
      

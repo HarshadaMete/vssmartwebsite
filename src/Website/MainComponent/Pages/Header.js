@@ -255,7 +255,7 @@ const Header = () => {
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item href="#/action-1">My Account</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">My Order</Dropdown.Item>
+                                    <Dropdown.Item><Link to='/myorder'>My Order</Link></Dropdown.Item>
                                     <Dropdown.Item href="#/action-3" to='/register' onClick={logout}>Logout</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
@@ -269,8 +269,8 @@ const Header = () => {
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item href="#/action-1">My Account</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">My Order</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3" to='/register' >Sign In</Dropdown.Item>
+                                    <Link to='/login'><Dropdown.Item>My Order</Dropdown.Item></Link>
+                                    <Dropdown.Item><Link to='/login'> Sign In</Link></Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         )}
@@ -357,7 +357,7 @@ const Header = () => {
                         </ul>
                     </div>
                 </nav >
-            </div>            
+            </div>
             {/* navbar-third-end */}
             {/* offcanvas */}
             <div>

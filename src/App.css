@@ -183,7 +183,8 @@ navbar-second
   margin-right: 60px;
 
 }
-.nav-sec-logout-btn{
+
+.nav-sec-logout-btn {
   height: 30%;
   width: 68%;
   position: relative;
@@ -1088,13 +1089,15 @@ navbar-second
   width: 90%;
   margin-top: 30px;
 }
-.offcan-plus-btn{
+
+.offcan-plus-btn {
   margin-left: 10px;
   font-weight: bold;
- background-color:#D0D0D0 ;
- border: none;
+  background-color: #D0D0D0;
+  border: none;
 }
-.offcan-plus-btn:hover{
+
+.offcan-plus-btn:hover {
   background-color: #11823b;
   color: #ffffff;
 }
@@ -1128,13 +1131,13 @@ navbar-second
   font-size: 55px;
 }
 
- .cart-t-head{
+.cart-t-head {
   font-size: 24px;
   background-color: #11823b;
-  color:#ffffff;
+  color: #ffffff;
 }
 
-.cartlist-remove{
+.cartlist-remove {
   margin-top: 30px;
   color: #efff00;
 }
@@ -1144,6 +1147,7 @@ navbar-second
   flex-direction: column;
   align-items: flex-start;
 }
+
 /* wishlist */
 .wishlist-para {
   text-align: center;
@@ -1154,33 +1158,39 @@ navbar-second
 
 .wishlist-home-li {
   text-decoration: none;
-  color:#ffffff;
+  color: #ffffff;
 }
 
 .wishlist-home-li:hover {
   color: #11823b;
   text-decoration: underline;
 }
+
 /* checkout */
-.checkout-card:hover{
+.checkout-card:hover {
   border-color: #11823b;
 }
-.checkout-card2{
+
+.checkout-card2 {
   border-radius: 7px;
 }
-.checkout-card2:hover{
+
+.checkout-card2:hover {
   border-color: #11823b;
-  background-color:#bcf5bc;
+  background-color: #bcf5bc;
 }
-.terms-con{
+
+.terms-con {
   color: #11823b;
   text-decoration: none;
 }
-.terms-con:hover{
+
+.terms-con:hover {
   color: #11823b;
   text-decoration: underline;
 }
-.checkout-btn{
+
+.checkout-btn {
   font-weight: bold;
   background-color: #04AA6D;
   height: 120%;
@@ -1188,8 +1198,136 @@ navbar-second
   font-size: 15px;
   border-color: #04AA6D;
 }
-.checkout-btn:hover{
+
+.checkout-btn:hover {
   color: #04AA6D;
   background-color: #ffffff;
   border-color: #04AA6D;
+}
+
+/* myorder */
+.myorder-head {
+  text-align: center;
+  color: #ffffff;
+  font-weight: bold;
+  padding-top: 100px;
+  font-size: 45px;
+}
+
+.order-div {
+  height: 60px;
+  width: 240px;
+  border: 2px solid #11823b;
+  border-radius: 7px;
+}
+
+.order-card-head {
+  align-items: flex-start;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.order-card-para {
+  width: 250px;
+  text-align: right;
+
+}
+
+.order-action-btn {
+  height: 50px;
+  width: 70px;
+  border-radius: 12px;
+  border: 3px solid #11823b;
+
+}
+
+
+.track-circle1{
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 2px dotted #11823b;
+  margin-left: 4%;
+ position: absolute;
+ margin-top: -30px;
+ background-color: #11823b;
+}
+.track-circle2{
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 2px dotted #11823b;
+  margin-left: 20%;
+ position: absolute;
+ margin-top: -30px;
+ background-color: #ffffff;
+}
+.track-circle3{
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 2px dotted #11823b;
+  background-color: #ffffff;
+  margin-left: 36%;
+ position: absolute;
+ margin-top: -30px;
+}
+.track-circle4{
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 2px dotted #11823b;
+  background-color: #ffffff;
+  margin-left: 52%;
+ position: absolute;
+ margin-top: -30px;
+}
+.track-circle5{
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 2px dotted #11823b;
+  background-color: #ffffff;
+  margin-left: 68%;
+ position: absolute;
+ margin-top: -30px;
+}
+.track-circle6{
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 2px dotted #11823b;
+  background-color: #ffffff;
+  margin-left: 85%;
+ position: absolute;
+ margin-top: -30px;
+}
+.order-progress1{
+  position: relative;
+  background-color: #11823b;
+  height: 7px;
+  width: 20%;
+}
+.order-progress{
+  position: relative;
+  background-color: #D3D3D3;
+  height: 7px;
+  width: 20%;
+}
+.myorder-icon{
+  font-weight: bold;
+  font-size: 32px;
+  margin-top: 8px;
+  color: #11823b;
+}
+.myorder-icon1{
+  font-weight: bold;
+  font-size: 32px;
+  margin-top: 8px;
+  color: #ffffff;
+}
+.order-head{
+  color: #11823b;
+  font-weight: bold;
+  font-size: 20px;
 }
