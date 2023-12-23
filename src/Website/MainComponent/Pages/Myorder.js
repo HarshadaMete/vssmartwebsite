@@ -88,29 +88,13 @@ const Myorder = () => {
                 </div>
                 <div style={{ display: activePanel === index + 1 ? 'block' : 'none' }}>
                   <div className='d-flex' style={{ marginTop: '50px' }}>
-                    <ProgressBar
-                      className='order-progress1'/>
-                    <ProgressBar
-                      className='order-progress'                    
-                    />
-                    <ProgressBar
-                      className='order-progress'                    
-                    />
-                    <ProgressBar
-                      className='order-progress'                    
-                    />
-                    <ProgressBar
-                      className='order-progress'
-                      bgcolor="#99ccff"
-                      progress="25"
-                      height={5}
-                    />
-                    <ProgressBar
-                      className='order-progress'
-                      bgcolor="#99ccff"
-                      progress="25"
-                      height={5}
-                    />
+                    <ProgressBar className='order-progress1'/>
+                    <ProgressBar className='order-progress'/>
+                    <ProgressBar className='order-progress'/>
+                    <ProgressBar className='order-progress'/>
+                    <ProgressBar className='order-progress'/>
+                    <ProgressBar className='order-progress'/>
+                    
                   </div>
                   {item.ordermaster_order_status == 1 ? (
                     <ul className='text-center' id='progress' type='none'>
