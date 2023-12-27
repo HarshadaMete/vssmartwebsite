@@ -63,11 +63,9 @@ const Cart = () => {
 
     return (
         <>
-
             <div className='container-fluid mt-3'>
                 <div className='bg-text cart-con1'>
                     <h1 className='cart-head'>Your Cart</h1>
-
                 </div>
             </div>
             <div className='container mt-5'>
@@ -93,8 +91,6 @@ const Cart = () => {
                                         </tr>
                                     </thead>
                                     {/* Add your table body here */}
-
-
                                     <tbody>
                                         {Cart.map((item) => (
                                             <tr className='border-bottom'>
@@ -107,19 +103,16 @@ const Cart = () => {
                                                 <td className="pt-4 border-end">&#8377; {((item.sale_price * item.cart_product_qty * item.tax_per) / (100 + item.tax_per)).toFixed(2)}</td>
                                                 <td className="pt-4 border-end">&#8377; {item.point_value}</td>
                                                 <td className="pt-4 border-end">&#8377; {item.sale_price * item.cart_product_qty}</td>
-
                                             </tr>
                                         ))}
                                     </tbody>
                                 </table>
                             </div>
-
                             <div className='row'>
                                 <div className='mt-5 md-6'>
                                     <h2 style={{ fontSize: '35px', color: 'green', fontWeight: 'bold' }}>Cart Total</h2>
                                     <hr style={{ width: '60%', marginLeft: '22%', height: "1%", color: '#11823b' }}></hr>
                                     <div className='d-flex'>
-
                                         <div className='col-lg-6 col-md-6 col-sm-12'>
                                             <ul type='none' style={{ fontSize: '19px', fontWeight: 'bold' }} className='ms-start'>
                                                 <li className='m-3'>Subtotal</li>
@@ -128,7 +121,6 @@ const Cart = () => {
                                                 <li className='m-3'>Discount </li>
                                                 <li className='m-3'>Total</li>
                                             </ul>
-
                                         </div>
                                         <div className='col-lg-6 col-md-6 col-sm-12'>
                                             <ul type='none' style={{ fontSize: '19px', fontWeight: 'bold' }}>
@@ -138,28 +130,14 @@ const Cart = () => {
                                                 <li className='m-3'> <span>&#8377;{disc.toFixed(2)}</span></li>
                                                 <li className='m-3'><span>&#8377;{subtotal.toFixed(2)}</span></li>
                                             </ul>
-                                        </div>
-                                        {/* <ul type='none'>
-                                            <li>Subtotal <span>&#8377;{subtotal.toFixed(2)}</span></li>
-                                            <li>Gst <span>&#8377;{gst.toFixed(2)}</span></li>
-                                            <li>P V Value <span>&#8377;{pv.toFixed(2)}</span></li>
-                                            <li>Discount <span>&#8377;{disc.toFixed(2)}</span></li>
-                                            <li>Total <span>&#8377;{subtotal.toFixed(2)}</span></li>
-                                        </ul> */}
+                                        </div> 
                                     </div>
-
-
                                 </div>
-
                             </div>
-
-
                         </form>
                     </div>
                 </div>
-
             </div>
-
             <div className='row'>
                 <div className='col-lg-12 col-md-6 col-sm-12'>
                     <Link to={'/checkout'} style={{textDecoration:'none'}}>
@@ -169,13 +147,10 @@ const Cart = () => {
                                    Procced To Checkout <span>&#8377;{subtotal.toFixed(2)}</span>
                                 </button> 
                             </div>
-
                         </div>
                     </Link>
                 </div>
             </div>
-
-
         </>
     )
 }

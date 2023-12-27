@@ -86,6 +86,24 @@ const Subbrand = () => {
         }).
             catch((e) => { console.log(e); });
     }
+     // pagenation
+     const [pages, Setpages] = useState(1);
+
+     const [Fromidx, SetFromidx] = useState(0);
+   
+     const [Index, SetIndex] = useState(12);
+   
+     function nextpage() {
+       SetFromidx(Fromidx + 12);
+       SetIndex(Index + 12);
+       Setpages(pages + 1);
+     }
+   
+     function Previoupage() {
+       SetFromidx(Fromidx - 12);
+       SetIndex(Index - 12);
+       Setpages(pages - 1);
+     }
     return (
         <>
             <div className='container-fluid mt-3'>
@@ -185,7 +203,7 @@ const Subbrand = () => {
                     <div className='col-lg-9 col-md-6 col-sm-12'>
                         <div className='container-fluid'>
                             <div className='row'>
-                                {MainBrand.map((pro1, data) => (
+                                {MainBrand.slice(Fromidx,Index).map((pro1, data) => (
                                     <div className='col-lg-3 col-md-6 col-sm-12 mt-3'>
                                         <div className="card subcat-card mt-3" style={{ width: '14rem' }}>
                                             <div className='subcat-heart-icon'>
@@ -225,6 +243,29 @@ const Subbrand = () => {
                     </div>
                 </div>
             </div>
+            {/* pagenation */}
+            <nav aria-label="Page navigation example">
+                <ul className="Page1 pagination justify-content-center">
+                    <li className="page-item ">
+                        <button className=" page-link" onClick={Previoupage}>
+                            Previous
+                        </button>
+                    </li>
+
+                    <li className="page-item disabled">
+                        <a className="page-link" href="">
+                            {" "}
+                            Current Page -{pages}
+                        </a>
+                    </li>
+
+                    <li className="page-item">
+                        <button className="page-link" onClick={nextpage}>
+                            Next
+                        </button>
+                    </li>
+                </ul>
+            </nav>
 
         </>
     )

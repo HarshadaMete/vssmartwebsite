@@ -15,35 +15,6 @@ const Shop = () => {
             SetActiveindex(index);
         }
     }
-    // const [Product1, setProduct1] = useState([])
-    // const [Category, setCategory] = useState([]);
-    // const [Brands, setBrands] = useState([]);
-    // const getSlider = () => {
-
-    //     http.get(`/brands`).then((res) => {
-    //         console.log(res.data);
-    //         setBrands(res.data.brands);
-
-    //     }).catch((e) => { console.log(e); });
-
-    //     http.get(`/categories`).then((res) => {
-    //         console.log(res.data);
-    //         setCategory(res.data.categories);
-
-    //     }).catch((e) => { console.log(e); });
-
-
-    //     http.get(`/products`).then((res) => {
-    //         console.log(res.data);
-    //         setProduct1(res.data.products.data);
-
-    //     }).catch((e) => { console.log(e); });
-
-    // }
-    // useEffect(() => {
-    //     getSlider()
-    // }, [])
-    // product
     const [Product, SetProduct] = useState([]);
     // console.log(MainBrand);
     // brand name
@@ -102,6 +73,24 @@ const Shop = () => {
         }).
             catch((e) => { console.log(e); });
     }
+      // pagenation
+      const [pages, Setpages] = useState(1);
+
+      const [Fromidx, SetFromidx] = useState(0);
+    
+      const [Index, SetIndex] = useState(12);
+    
+      function nextpage() {
+        SetFromidx(Fromidx + 12);
+        SetIndex(Index + 12);
+        Setpages(pages + 1);
+      }
+    
+      function Previoupage() {
+        SetFromidx(Fromidx - 12);
+        SetIndex(Index - 12);
+        Setpages(pages - 1);
+      }
     return (
         <>
             <div className='container-fluid mt-3'>
@@ -201,7 +190,7 @@ const Shop = () => {
                     <div className='col-lg-9 col-md-6 col-sm-12'>
                         <div className='container-fluid'>
                             <div className='row'>
-                                {Product.map((pro1, data) => (
+                                {Product.slice(Fromidx,Index).map((pro1, data) => (
                                     <div className='col-lg-3 col-md-6 col-sm-12 mt-3'>
                                         <div className="card collected-card mt-3" style={{ width: '14rem' }}>
                                             <div className='shop-heart-icon'>
@@ -241,16 +230,31 @@ const Shop = () => {
                     </div>
                 </div>
             </div>
+            {/* pagenation */}
+            <nav aria-label="Page navigation example" style={{marginTop:'20px'}}>
+                <ul className="Page1 pagination justify-content-center">
+                    <li className="page-item ">
+                        <button className=" page-link" onClick={Previoupage}>
+                            Previous
+                        </button>
+                    </li>
 
-            <div className='pagenation-div col-lg-12 col-md-12 col-sm-12'>
-                <ul className="pagination page-ull">
-                    <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-                    <li className="page-item"><a className="page-link" href="#">1</a></li>
-                    <li className="page-item"><a className="page-link" href="#">2</a></li>
-                    <li className="page-item"><a className="page-link" href="#">3</a></li>
-                    <li className="page-item"><a className="page-link" href="#">Next</a></li>
+                    <li className="page-item disabled">
+                        <a className="page-link" href="">
+                            {" "}
+                            Current Page -{pages}
+                        </a>
+                    </li>
+
+                    <li className="page-item">
+                        <button className="page-link" onClick={nextpage}>
+                            Next
+                        </button>
+                    </li>
                 </ul>
-            </div>
+            </nav>
+
+
 
         </>
     )

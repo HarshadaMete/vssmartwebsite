@@ -31,28 +31,17 @@ const Search = () => {
             }).catch((e) => {
                 console.log(e);
             });
-
-
-
     }
     useEffect(() => {
         getProduct();
 
     }, []);
-
-
-
-
-
-
-
     const addTocart = (product_id) => {
         console.log(product_id)
         http.get(`/add-to-cart/${product_id}`).then((res) => {
             console.log(res.data);
             alert(res.data.msg)
         })
-
             .catch((e) => {
                 console.log(e)
             });

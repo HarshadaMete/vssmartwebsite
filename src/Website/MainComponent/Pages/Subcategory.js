@@ -53,8 +53,6 @@ const Subcategory = () => {
     // console.log(Count1[0]);
 
     const getCategoryData = () => {
-
-
         http.get(`/product-shop/${cat_id}/${sub_id}`).then((res) => {
 
             console.log(res.data);
@@ -121,7 +119,6 @@ const Subcategory = () => {
             />
         );
     }
-
     function SamplePrevArrow(props) {
         const { className, style, onClick } = props;
         return (
@@ -138,7 +135,6 @@ const Subcategory = () => {
         speed: 1500,
         slidesToShow: 5,
         slidesToScroll: 2,
-
 
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
@@ -158,8 +154,24 @@ const Subcategory = () => {
             },
         ]
     };
-
     // slick-slider-end
+    // pagenation
+    const [pages, Setpages] = useState(1);
+
+    const [Fromidx, SetFromidx] = useState(0);
+  
+    const [Index, SetIndex] = useState(12);
+  
+    function nextpage() {
+      SetFromidx(Fromidx + 12);
+      SetIndex(Index + 12);
+      Setpages(pages + 1);
+    }
+    function Previoupage() {
+      SetFromidx(Fromidx - 12);
+      SetIndex(Index - 12);
+      Setpages(pages - 1);
+    }
     return (
         <>
             <div className='container-fluid mt-3'>
@@ -287,11 +299,11 @@ const Subcategory = () => {
                     <div className='col-lg-9 col-md-6 col-sm-12'>
                         <div className='container-fluid'>
                             <div className='row'>
-                                {Category.map((pro1, data) => (
+                                {Category.slice(Fromidx,Index).map((pro1, data) => (
                                     <div className='col-lg-3 col-md-6 col-sm-12 mt-3'>
                                         <div className="card subcat-card mt-3" style={{ width: '14rem' }}>
                                             <div className='subcat-heart-icon'>
-                                                
+
                                                 {token ? (<Link onClick={() => addTowish(pro1.product_id)} > <i class="fa-solid fa-heart subcat-heart-iconnn"></i></Link>) : (
                                                     <Link to={'/login'}> <i class="fa-solid fa-heart subcat-heart-iconnn"></i></Link>
                                                 )}
@@ -337,6 +349,28 @@ const Subcategory = () => {
                     <li className="page-item"><a className="page-link" href="#">Next</a></li>
                 </ul>
             </div> */}
+            <nav aria-label="Page navigation example">
+                <ul className="Page1 pagination justify-content-center">
+                    <li className="page-item ">
+                        <button className=" page-link" onClick={Previoupage}>
+                            Previous
+                        </button>
+                    </li>
+
+                    <li className="page-item disabled">
+                        <a className="page-link" href="">
+                            {" "}
+                            Current Page -{pages}
+                        </a>
+                    </li>
+
+                    <li className="page-item">
+                        <button className="page-link" onClick={nextpage}>
+                            Next
+                        </button>
+                    </li>
+                </ul>
+            </nav>
         </>
     )
 }

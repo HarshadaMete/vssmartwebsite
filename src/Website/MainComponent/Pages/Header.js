@@ -166,17 +166,7 @@ const Header = () => {
                     </nav>
                 </div>
             </div>
-            {/* <div className='container-fluid bg-success '>
-                <div className='row'>
-                    <div className='col-lg-6'>
-                        <b className='text-light'>Welcome to VS Mart in Your Dream Online Store! </b>
-                    </div>
-                    <div className='col-lg-6 px-5 text-end '>
-                        <Link to="/contact" className=''><p className='con ' >Contact</p></Link>
-                    </div>
-                </div>
-            </div> */}
-
+            
             {/* navbar-first-end */}
 
             {/* navbar-second */}

@@ -93,8 +93,7 @@ const Myorder = () => {
                     <ProgressBar className='order-progress'/>
                     <ProgressBar className='order-progress'/>
                     <ProgressBar className='order-progress'/>
-                    <ProgressBar className='order-progress'/>
-                    
+                    <ProgressBar className='order-progress'/>                  
                   </div>
                   {item.ordermaster_order_status == 1 ? (
                     <ul className='text-center' id='progress' type='none'>
@@ -453,17 +452,12 @@ const Myorder = () => {
                         <div class="card" style={{ backgroundColor: '#F5F5F5', borderRadius: '7px' }}>
                           <div class="card-body">
                             <h6 style={{ fontSize: '15px', fontWeight: 'bold' }}>Delivery Location</h6>
-                            <p>Baramati</p>
+                            <p>{user.address}</p>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-
-
-
-
-
                   <div className='container mt-5'>
                     <div className='row'>
                       <div className='col-12 text-center'>
@@ -474,7 +468,6 @@ const Myorder = () => {
                                 <tr>
                                   <th colSpan={7}></th>
                                 </tr>
-
                                 <tr style={{ marginTop: '25px' }}>
                                   <th className='cart-t-head col-1'>Sr.No</th>
                                   <th className='cart-t-head col-2'>Product</th>
@@ -483,12 +476,9 @@ const Myorder = () => {
                                   <th className='cart-t-head col-2'>Brand</th>
                                   <th className='cart-t-head col-1'>Quantity</th>
                                   <th className='cart-t-head col-2'>Action</th>
-
                                 </tr>
                               </thead>
                               {/* Add your table body here */}
-
-
                               <tbody>
                                 {Cart.map((item, index) => (
                                   <tr className='border-bottom'>
