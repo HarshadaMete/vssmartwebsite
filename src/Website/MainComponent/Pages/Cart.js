@@ -130,7 +130,7 @@ const Cart = () => {
                                                 <li className='m-3'> <span>&#8377;{disc.toFixed(2)}</span></li>
                                                 <li className='m-3'><span>&#8377;{subtotal.toFixed(2)}</span></li>
                                             </ul>
-                                        </div> 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -140,12 +140,12 @@ const Cart = () => {
             </div>
             <div className='row'>
                 <div className='col-lg-12 col-md-6 col-sm-12'>
-                    <Link to={'/checkout'} style={{textDecoration:'none'}}>
+                    <Link to={'/checkout'} style={{ textDecoration: 'none' }}>
                         <div class="d-grid gap-2">
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
                                 <button class="btn btn-success ms-80%" type="button" style={{ width: '90%', height: '70%', marginTop: '3%', fontSize: '20px' }}>
-                                   Procced To Checkout <span>&#8377;{subtotal.toFixed(2)}</span>
-                                </button> 
+                                    Procced To Checkout <span>&#8377;{subtotal.toFixed(2)}</span>
+                                </button>
                             </div>
                         </div>
                     </Link>

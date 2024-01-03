@@ -1338,3 +1338,14 @@ navbar-second
   color: #11823b;
  font-weight: bold;
 }
+/* bankdetailS-page */
+.bank-img{
+  text-align: center;
+  justify-content: center;
+}
+.bank-head{
+  font-size: 24px;
+  background-color:#43A047;
+  color: #ffffff;
+  font-weight: bold;
+}
