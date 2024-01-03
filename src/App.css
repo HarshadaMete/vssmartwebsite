@@ -272,6 +272,7 @@ navbar-second
 .our-featured-card {
   background-color: #ffffff;
   border-radius: 10px;
+  box-shadow:  10px 10px 10px 5px grey;
 }
 
 .our-featured-card:hover {
@@ -282,7 +283,6 @@ navbar-second
   text-align: center;
   justify-content: center;
 }
-
 .our-featured-show-btn {
   font-weight: bold;
   border: 2px solid #11823b;
@@ -359,6 +359,7 @@ navbar-second
 
 .collected-card {
   margin: 10px;
+  box-shadow:  10px 10px 10px 5px grey;
 
 }
 
@@ -789,7 +790,6 @@ navbar-second
   /* Set the height to 100% to make all cards the same height */
   display: flex;
   flex-direction: column;
-
 }
 
 .card.collected-card:hover {
@@ -875,6 +875,7 @@ navbar-second
 
 .subcat-card {
   margin: 10px;
+  box-shadow:  10px 10px 10px 5px gray;
 
 }
 
@@ -1330,4 +1331,10 @@ navbar-second
   color: #11823b;
   font-weight: bold;
   font-size: 20px;
+}
+/* pagenation */
+.custom-button {
+  border-color: 2px solid #11823b;
+  color: #11823b;
+ font-weight: bold;
 }
