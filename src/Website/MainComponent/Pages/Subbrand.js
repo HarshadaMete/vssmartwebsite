@@ -97,12 +97,22 @@ const Subbrand = () => {
        SetFromidx(Fromidx + 12);
        SetIndex(Index + 12);
        Setpages(pages + 1);
+       const element = document.getElementById("section-1");
+       if (element) {
+           //  Will scroll smoothly to the top of the next section
+           element.scrollIntoView({ behavior: "smooth" });
+       }
      }
    
      function Previoupage() {
        SetFromidx(Fromidx - 12);
        SetIndex(Index - 12);
        Setpages(pages - 1);
+       const element = document.getElementById("section-1");
+       if (element) {
+           //  Will scroll smoothly to the top of the next section
+           element.scrollIntoView({ behavior: "smooth" });
+       }
      }
     return (
         <>
@@ -111,13 +121,9 @@ const Subbrand = () => {
                     <h1 className='subcat-head'>{brands.brand_name}</h1>
                     <p className='subcat-para'><i class="fa-solid fa-house"></i><a href='/' className='subcat-home-li'>Home/</a>{brands.brand_name}</p>
                 </div>
-
-
             </div>
-
-
             {/* filter-by-price */}
-            <div className='container-fluid shop-con2'>
+            <div className='container-fluid shop-con2' id='section-1'>
                 <div className='row'>
                     <div className='col-lg-3 col-md-6 col-sm-12'>
                         <div className="card ms-5 mt-4" style={{ width: '18rem' }}>
@@ -147,25 +153,18 @@ const Subbrand = () => {
                                                         ))}
                                                     {/* <ul style={{ display: activeindex === index ? 'block' : 'none' }}>
                                                         {Sub.slice((sub) => sub.subcategory_category_id === cat.category_id).map((sub) => (
-
                                                             <li className='text-dark'><Link to={`/product-shop/${cat.category_id}/${sub.subcategory_name}`}>{sub.subcategory_name}</Link></li>
                                                         ))}
-
                                                     </ul>
                                                      */}
-
                                                 </a>
                                             </li>
-
                                         ))}
                                     </ul>
                                 </form>
                             </div>
-
                         </div>
-
                         {/* filter-by-brand */}
-
                         <div class="card ms-5 mt-5" style={{ width: "18rem", height: "370px", overflow: "scroll" }}>
                             <div className="card-body">
                                 <h6 className="card-title">FILTER BRAND</h6>
@@ -186,18 +185,14 @@ const Subbrand = () => {
 
                                                             <li className='text-dark'><Link to={`/product-shop/${brand.brand_id}/${sub.subcategory_id}`}>{sub.subcategory_name}</Link></li>
                                                         ))}
-
                                                     </ul> */}
-
                                                 </a>
                                             </li>
                                         ))}
                                     </ul>
                                 </form>
                             </div>
-
                         </div>
-
                     </div>
                     {/* product-card */}
                     <div className='col-lg-9 col-md-6 col-sm-12'>
@@ -226,7 +221,7 @@ const Subbrand = () => {
 
                                                     <span className='text-success'>{pro1.sale_price}</span></p>
                                                 <div class="d-grid gap-2">
-                                                    <button class="btn add-cart-btn" type="button"><i className="fa-solid fa-basket-shopping nav-sec-icon1"></i>{token ? (<Link style={{ textDecoration: 'none', color: 'white', fontSize: '12px' }} onClick={() => addTocart(pro1.product_id)} >Add to cart </Link>) : (
+                                                    <button class="btn add-cart-btn" type="button"><i className="fa-solid fa-basket-shopping nav-sec-icon1"></i>{token ? (<Link style={{ textDecoration: 'none', color: 'white', fontSize: '15px' }} onClick={() => addTocart(pro1.product_id)}  >Add to cart </Link>) : (
                                                         <Link style={{ textDecoration: 'none', color: 'black', fontSize: '12px' }} to={'/login'}> Add</Link>
                                                     )}</button>
 
@@ -244,7 +239,7 @@ const Subbrand = () => {
                 </div>
             </div>
             {/* pagenation */}
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example" style={{marginTop:'10px'}}>
                 <ul className="Page1 pagination justify-content-center">
                     <li className="page-item ">
                         <button className=" page-link" onClick={Previoupage}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import Authuser from '../Authentication/Authuser';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -8,10 +8,46 @@ import { Dropdown } from 'react-bootstrap';
 // import { Dropdown } from "react-bootstrap";
 const Header = () => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [searchParams, setSearchParams] = useSearchParams(); // Use useSearchParams
+    
     const handleInputChange = event => {
         setSearchQuery(event.target.value);
     };
+    const location = useLocation();
+    const [searchParams, setSearchParams] = useSearchParams(location.search); // Use useSearchParams
+   
+    const query = searchParams.get('query');
+    const [Product, setProduct] = useState([]);
+    const handleSearch = () => {
+        
+        const filteredRecords = Product.filter(record =>
+            record.english_name.toLowerCase().includes(query.toLowerCase())
+        );
+        console.log(filteredRecords);
+    
+        setProduct(filteredRecords);
+    };
+    useEffect(() => { 
+        handleSearch();
+    }, [searchQuery]);
+
+    const getProduct = () => {
+
+        http.get(`/products`)
+            .then((res) => {
+                const filteredRecords = res.data.products.data.filter(record =>
+                    record.english_name.toLowerCase().includes(query.toLowerCase())
+                );
+                setProduct(filteredRecords);
+            }).catch((e) => {
+                console.log(e);
+            });
+    }
+    useEffect(() => {
+        getProduct();
+
+    }, []);
+
+
     const [showMegaMenu, setShowMegaMenu] = useState(false);
     const [showMegaMenu2, setShowMegaMenu2] = useState(false);
     const handleMouseEnter = () => {
@@ -166,7 +202,7 @@ const Header = () => {
                     </nav>
                 </div>
             </div>
-            
+
             {/* navbar-first-end */}
 
             {/* navbar-second */}
@@ -179,8 +215,10 @@ const Header = () => {
                     <div className="col-lg-3 col-md-3 col-sm-3">
                         <div className="input-group">
                             <input className="form-control search-btn" value={searchQuery}
+
                                 onChange={handleInputChange} type="text" placeholder="Search Anything..." aria-label="Search" />
-                            <button className="btn search-btn">
+
+                            <button className="btn search-btn" onClick={handleSearch}>
                                 <Link
                                     className="text-black"
                                     to={`/search?query=${encodeURIComponent(searchQuery)}`}
@@ -189,6 +227,12 @@ const Header = () => {
                                     <i className="fa-solid fa-search"></i>
                                 </Link>
                             </button>
+                            {/* Display search results */}
+                            <ul>
+                            { Product.map((search)=>(
+                                    <li key={search.product_id}>{search.english_name}</li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-4 col-sm-4 text-end d-flex mt-4">

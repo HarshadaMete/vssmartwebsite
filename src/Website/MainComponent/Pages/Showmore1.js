@@ -4,16 +4,21 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Authuser from '../Authentication/Authuser';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Showmore1 = () => {
     const { http, token, user } = Authuser();
     // const [Category1, setCategory1] = useState([])
     const [Product1, setProduct1] = useState([])
+    const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(1);
+    const [state, setState] = ([])
     // const [Brands, setBrands] = useState([])
     const getSlider = () => {
         http.get(`/products`).then((res) => {
             console.log(res.data);
             setProduct1(res.data.products.data);
+
         })
     }
     useEffect(() => {
@@ -39,77 +44,110 @@ const Showmore1 = () => {
             catch((e) => { console.log(e); });
     }
     // pagenation
-    const [pages, Setpages] = useState(1);
+    // const [pages, Setpages] = useState(1);
 
-    const [Fromidx, SetFromidx] = useState(0);
+    // const [Fromidx, SetFromidx] = useState(0);
 
-    const [Index, SetIndex] = useState(4);
+    // const [Index, SetIndex] = useState(4);
 
-    function nextpage() {
-        SetFromidx(Fromidx + 4);
-        SetIndex(Index + 4);
-        Setpages(pages + 1);
-        const element = document.getElementById("section-1");
-        if (element) {
-            //  Will scroll smoothly to the top of the next section
-            element.scrollIntoView({ behavior: "smooth" });
+    // function nextpage() {
+    //     SetFromidx(Fromidx + 4);
+    //     SetIndex(Index + 4);
+    //     Setpages(pages + 1);
+    //     const element = document.getElementById("section-1");
+    //     if (element) {
+
+    //         element.scrollIntoView({ behavior: "smooth" });
+    //     }
+    // }
+
+    // function Previoupage() {
+    //     SetFromidx(Fromidx - 4);
+    //     SetIndex(Index - 4);
+    //     Setpages(pages - 1);
+    //     const element = document.getElementById("section-1");
+    //     if (element) {
+
+    //         element.scrollIntoView({ behavior: "smooth" });
+    //     }
+    // }
+    const fetchMoreData = () => {
+        if (Product1.length >= 192) {
+            setHasMore(false);
+            return;
         }
-    }
 
-    function Previoupage() {
-        SetFromidx(Fromidx - 4);
-        SetIndex(Index - 4);
-        Setpages(pages - 1);
-    }
-  
+        // Simulating an API call delay (timeout)
+        setTimeout(() => {
+            // Make an API call to fetch new data
+            getSlider();
+        }, 30000);
+    };
+
     return (
         <>
-           
             <div className='container' id='section-1'>
-                <div className='row'>
-                    {Product1.slice(Fromidx, Index).map((pro1, data) => (
-                        <div className='col-lg-6 col-md-6 col-sm-12'>
-                            <div className="card  our-featured-card mt-5 " style={{ maxWidth: 540 }}>
-                                <div className="row g-0">
-                                    <div className="col-md-4">
-                                        <div className='d-flex'>
-                                            <div className='feature-div'>Feature</div>
-                                            <div className='off-div'>30%OFF</div>
-                                        </div>
-                                        <div className='heart-icon'>
-                                            {token ? (<Link onClick={() => addTowish(pro1.product_id)} ><i class="fa-solid fa-heart"></i></Link>) : (
-                                                <Link to={'/login'}> <i class="fa-solid fa-heart"></i></Link>
-                                            )}
-                                        </div>
-                                        <img src={pro1.product_image} className="img-fluid rounded-start mb-1 our-feature-img" alt="..." />
-                                        <div className='our-feature-icon'>
-                                            <a class="btn btn-success m-2" href="#" role="button"><i class="fa-solid fa-shuffle"></i></a>
-                                            <a class="btn btn-success" href="#" role="button"><i class="fa-solid fa-eye"></i></a>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-8">
-                                        <div className="card-body">
-                                            <a className='card-title' href='#'>{pro1.english_name}</a>
-                                            <p className="card-text1 text-primary pt-3">{pro1.point_value}</p>
-                                            <p className="card-text2 text-black"> MRP<strike className="text-danger">{pro1.mrp_price}</strike>
+                <InfiniteScroll
+                    dataLength={Product1.length}
+                    next={fetchMoreData}
+                    hasMore={Product1.length != 191}
+                    loader={<p className='text-center my-3'>Loading.............</p>}
+                    endMessage={
+                        <p style={{ textAlign: 'center' }}>
+                            <b>No more products to load</b>
+                        </p>
+                    }
 
-                                                <span className='text-success'>{pro1.sale_price}</span></p>
-                                            <div class="d-grid gap-2">
-                                                <button class="btn add-cart-btn" type="button">
-                                                    <i className="fa-solid fa-basket-shopping nav-sec-icon1">{token ? (<Link onClick={() => addTocart(pro1.product_id)} >Add to cart </Link>) : (
-                                                        <Link to={'/login'}> Add</Link>
-                                                    )}</i></button>
+                >
+                    <div className='row'>
+                        {Product1.length > 0 ? (
+                            Product1.map((pro1, data) => (
+                                <div className='col-lg-6 col-md-6 col-sm-12'>
+                                    <div className="card  our-featured-card mt-5 " style={{ maxWidth: 540 }}>
+                                        <div className="row g-0">
+                                            <div className="col-md-4">
+                                                <div className='d-flex'>
+                                                    <div className='feature-div'>Feature</div>
+                                                    <div className='off-div'>30%OFF</div>
+                                                </div>
+                                                <div className='heart-icon'>
+                                                    {token ? (<Link onClick={() => addTowish(pro1.product_id)} ><i class="fa-solid fa-heart"></i></Link>) : (
+                                                        <Link to={'/login'}> <i class="fa-solid fa-heart"></i></Link>
+                                                    )}
+                                                </div>
+                                                <img src={pro1.product_image} className="img-fluid rounded-start mb-1 our-feature-img" alt="..." />
+                                                <div className='our-feature-icon'>
+                                                    <a class="btn btn-success m-2" href="#" role="button"><i class="fa-solid fa-shuffle"></i></a>
+                                                    <a class="btn btn-success" href="#" role="button"><i class="fa-solid fa-eye"></i></a>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-8">
+                                                <div className="card-body">
+                                                    <a className='card-title' href='#'>{pro1.english_name}</a>
+                                                    <p className="card-text1 text-primary pt-3">{pro1.point_value}</p>
+                                                    <p className="card-text2 text-black"> MRP<strike className="text-danger">{pro1.mrp_price}</strike>
+
+                                                        <span className='text-success'>{pro1.sale_price}</span></p>
+                                                    <div class="d-grid gap-2">
+                                                        <button class="btn add-cart-btn" type="button">
+                                                            <i className="fa-solid fa-basket-shopping nav-sec-icon1">{token ? (<Link onClick={() => addTocart(pro1.product_id)} style={{ textDecoration: 'none', color: 'white' }} >Add to cart </Link>) : (
+                                                                <Link to={'/login'}> Add</Link>
+                                                            )}</i></button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                            ))
+                        ) :
+                            (<p>No products available</p>)}
+
+                    </div>
+                </InfiniteScroll>
             </div>
             {/* pagenation */}
-            <nav aria-label="Page navigation example" style={{marginTop:'20px'}}>
+            {/* <nav aria-label="Page navigation example" style={{ marginTop: '20px' }}>
                 <ul className="Page1 pagination justify-content-center">
                     <li className="page-item ">
                         <button className=" page-link" onClick={Previoupage}>
@@ -130,7 +168,7 @@ const Showmore1 = () => {
                         </button>
                     </li>
                 </ul>
-            </nav>
+            </nav> */}
         </>
     )
 }

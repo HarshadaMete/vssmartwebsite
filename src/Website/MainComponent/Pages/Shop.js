@@ -2,11 +2,15 @@ import { Button } from 'bootstrap'
 import React, { useEffect, useState } from 'react'
 import Authuser from '../Authentication/Authuser';
 import { Link, useParams } from 'react-router-dom';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Shop = () => {
     const { http, user, token } = Authuser();
     let { shop } = useParams();
     const [activeindex, SetActiveindex] = useState(null);
+    const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(1);
+    const [state, setState] = ([])
     const handleItemClick = (index) => {
         if (index === activeindex) {
             // close currently open submenu
@@ -73,24 +77,43 @@ const Shop = () => {
         }).
             catch((e) => { console.log(e); });
     }
-      // pagenation
-      const [pages, Setpages] = useState(1);
+    // pagenation
+    //   const [pages, Setpages] = useState(1);
 
-      const [Fromidx, SetFromidx] = useState(0);
-    
-      const [Index, SetIndex] = useState(12);
-    
-      function nextpage() {
-        SetFromidx(Fromidx + 12);
-        SetIndex(Index + 12);
-        Setpages(pages + 1);
-      }
-    
-      function Previoupage() {
-        SetFromidx(Fromidx - 12);
-        SetIndex(Index - 12);
-        Setpages(pages - 1);
-      }
+    //   const [Fromidx, SetFromidx] = useState(0);
+
+    //   const [Index, SetIndex] = useState(12);
+
+    //   function nextpage() {
+    //     SetFromidx(Fromidx + 12);
+    //     SetIndex(Index + 12);
+    //     Setpages(pages + 1);
+    //     const element = document.getElementById("section-1");
+    //     if (element) {
+    //         element.scrollIntoView({ behavior: "smooth" });
+    //     }
+    //   }
+    //   function Previoupage() {
+    //     SetFromidx(Fromidx - 12);
+    //     SetIndex(Index - 12);
+    //     Setpages(pages - 1);
+    //     const element = document.getElementById("section-1");
+    //     if (element) {
+    //         element.scrollIntoView({ behavior: "smooth" });
+    //     }
+    //   }
+    const fetchMoreData = () => {
+        if (Product.length >= 192) {
+            setHasMore(false);
+            return;
+        }
+
+        // Simulating an API call delay (timeout)
+        setTimeout(() => {
+            // Make an API call to fetch new data
+            getsrandproductData();
+        }, 3000);
+    };
     return (
         <>
             <div className='container-fluid mt-3'>
@@ -102,7 +125,7 @@ const Shop = () => {
 
             </div>
             {/* filter-by-price */}
-            <div className='container-fluid shop-con2'>
+            <div className='container-fluid shop-con2' id='section-1'>
                 <div className='row'>
                     <div className='col-lg-3 col-md-6 col-sm-12'>
                         <div className="card ms-5 mt-4" style={{ width: '18rem' }}>
@@ -189,41 +212,56 @@ const Shop = () => {
                     {/* product-card */}
                     <div className='col-lg-9 col-md-6 col-sm-12'>
                         <div className='container-fluid'>
-                            <div className='row'>
-                                {Product.slice(Fromidx,Index).map((pro1, data) => (
-                                    <div className='col-lg-3 col-md-6 col-sm-12 mt-3'>
-                                        <div className="card collected-card mt-3" style={{ width: '14rem' }}>
-                                            <div className='shop-heart-icon'>
+                            <InfiniteScroll
+                                dataLength={Product.length}
+                                next={fetchMoreData}
+                                hasMore={Product.length != 191}
+                                loader={<p className='text-center my-3'>Loading.............</p>}
+                                endMessage={
+                                    <p style={{ textAlign: 'center' }}>
+                                        <b>No more products to load</b>
+                                    </p>
+                                }
 
-                                                {token ? (<Link onClick={() => addTowish(pro1.product_id)} > <i class="fa-solid fa-heart shop-heart-iconnn"></i></Link>) : (
-                                                    <Link to={'/login'}> <i class="fa-solid fa-heart shop-heart-iconnn"></i></Link>
-                                                )}
+                            >
+                                <div className='row'>
+                                    {Product.length > 0 ? (
+                                        Product.map((pro1, data) => (
+                                            <div className='col-lg-3 col-md-6 col-sm-12 mt-3'>
+                                                <div className="card collected-card mt-3" style={{ width: '14rem' }}>
+                                                    <div className='shop-heart-icon'>
 
-                                            </div>
+                                                        {token ? (<Link onClick={() => addTowish(pro1.product_id)} > <i class="fa-solid fa-heart shop-heart-iconnn"></i></Link>) : (
+                                                            <Link to={'/login'}> <i class="fa-solid fa-heart shop-heart-iconnn"></i></Link>
+                                                        )}
 
-                                            <img src={pro1.product_image} className="card-img-top collected-img" alt="..." />
-                                            <div className='collected-icon'>
-                                                <a class="btn btn-success m-2" href="#" role="button"><i class="fa-solid fa-shuffle"></i></a>
-                                                <a class="btn btn-success" href="#" role="button"><i class="fa-solid fa-eye"></i></a>
-                                            </div>
-                                            <div className="card-body">
-                                                <a className='card-title' href='#'>{pro1.english_name}</a>
-                                                <p className="card-text11 text-primary">{pro1.category_name}</p>
-                                                <p className="card-text22 text-black"> MRP<strike className="text-danger">{pro1.mrp_price}</strike>
+                                                    </div>
 
-                                                    <span className='text-success'>PV:{pro1.products_pv_percentages}</span></p>
-                                                <div class="d-grid gap-2">
-                                                    <button class="btn add-cart-btn" type="button"><i className="fa-solid fa-basket-shopping nav-sec-icon1">{token ? (<Link style={{ textDecoration: 'none', color: 'white', fontSize: '12px' }} onClick={() => addTocart(pro1.product_id)} >Add to cart </Link>) : (
-                                                        <Link style={{ textDecoration: 'none', color: 'black', fontSize: '12px' }} to={'/login'}> Add</Link>
-                                                    )}</i></button>
+                                                    <img src={pro1.product_image} className="card-img-top collected-img" alt="..." />
+                                                    <div className='collected-icon'>
+                                                        <a class="btn btn-success m-2" href="#" role="button"><i class="fa-solid fa-shuffle"></i></a>
+                                                        <a class="btn btn-success" href="#" role="button"><i class="fa-solid fa-eye"></i></a>
+                                                    </div>
+                                                    <div className="card-body">
+                                                        <a className='card-title' href='#'>{pro1.english_name}</a>
+                                                        <p className="card-text11 text-primary">{pro1.category_name}</p>
+                                                        <p className="card-text22 text-black"> MRP<strike className="text-danger">{pro1.mrp_price}</strike>
 
+                                                            <span className='text-success'>PV:{pro1.products_pv_percentages}</span></p>
+                                                        <div class="d-grid gap-2">
+                                                            <button class="btn add-cart-btn" type="button"><i className="fa-solid fa-basket-shopping nav-sec-icon1">{token ? (<Link style={{ textDecoration: 'none', color: 'white', fontSize: '12px' }} onClick={() => addTocart(pro1.product_id)} >Add to cart </Link>) : (
+                                                                <Link style={{ textDecoration: 'none', color: 'black', fontSize: '12px' }} to={'/login'}> Add</Link>
+                                                            )}</i></button>
+
+                                                        </div>
+
+                                                    </div>
                                                 </div>
-
                                             </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+                                        ))
+                                    ) : (<p>No products available</p>)}
+                                </div>
+                            </InfiniteScroll>
 
                         </div>
 
@@ -231,7 +269,7 @@ const Shop = () => {
                 </div>
             </div>
             {/* pagenation */}
-            <nav aria-label="Page navigation example" style={{marginTop:'20px'}}>
+            {/* <nav aria-label="Page navigation example" style={{marginTop:'30px'}}>
                 <ul className="Page1 pagination justify-content-center">
                     <li className="page-item ">
                         <button className=" page-link" onClick={Previoupage}>
@@ -252,7 +290,7 @@ const Shop = () => {
                         </button>
                     </li>
                 </ul>
-            </nav>
+            </nav> */}
 
 
 

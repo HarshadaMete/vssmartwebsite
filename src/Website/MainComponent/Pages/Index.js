@@ -409,8 +409,8 @@ const Index = () => {
                         <span className='text-success'>{pro1.sale_price}</span></p>
                       <div class="d-grid gap-2">
                         <button class="btn add-cart-btn" type="button">
-                          <i className="fa-solid fa-basket-shopping nav-sec-icon1">{token ? (<Link onClick={() => addTocart(pro1.product_id)} >Add to cart </Link>) : (
-                            <Link to={'/login'}> Add</Link>
+                          <i className="fa-solid fa-basket-shopping nav-sec-icon1">{token ? (<Link onClick={() => addTocart(pro1.product_id)} style={{ textDecoration: 'none', color: 'white', fontSize: '12px' }}>Add to cart </Link>) : (
+                            <Link to={'/login'} style={{ textDecoration: 'none', color: 'white', fontSize: '12px' }}> Add</Link>
                           )}</i></button>
 
                       </div>
@@ -467,8 +467,8 @@ const Index = () => {
                   <div class="d-grid gap-2">
                     {/* <button class="btn add-cart-btn" type="button"><i className="fa-solid fa-basket-shopping nav-sec-icon1"></i>Add</button> */}
                     <button class="btn add-cart-btn" type="button">
-                      <i className="fa-solid fa-basket-shopping nav-sec-icon1">{token ? (<Link onClick={() => addTocart(pro1.product_id)} >Add to cart </Link>) : (
-                        <Link to={'/login'}> Add</Link>
+                      <i className="fa-solid fa-basket-shopping nav-sec-icon1">{token ? (<Link onClick={() => addTocart(pro1.product_id)} style={{ textDecoration: 'none', color: 'white', fontSize: '12px' }} >Add to cart </Link>) : (
+                        <Link to={'/login'} style={{ textDecoration: 'none', color: 'white', fontSize: '12px' }}> Add</Link>
                       )}</i></button>
                   </div>
 

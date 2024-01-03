@@ -60,6 +60,11 @@ const Showmore2 = () => {
     SetFromidx(Fromidx - 8);
     SetIndex(Index - 8);
     Setpages(pages - 1);
+    const element = document.getElementById("section-1");
+    if (element) {
+        //  Will scroll smoothly to the top of the next section
+        element.scrollIntoView({ behavior: "smooth" });
+    }
   }
   return (
     <>
@@ -91,7 +96,7 @@ const Showmore2 = () => {
                   <div class="d-grid gap-2">
                     {/* <button class="btn add-cart-btn" type="button"><i className="fa-solid fa-basket-shopping nav-sec-icon1"></i>Add</button> */}
                     <button class="btn add-cart-btn" type="button">
-                      <i className="fa-solid fa-basket-shopping nav-sec-icon1">{token ? (<Link onClick={() => addTocart(pro1.product_id)} >Add to cart </Link>) : (
+                      <i className="fa-solid fa-basket-shopping nav-sec-icon1">{token ? (<Link onClick={() => addTocart(pro1.product_id)} style={{textDecoration:'none',color:'white'}} >Add to cart </Link>) : (
                         <Link to={'/login'}> Add</Link>
                       )}</i></button>
                   </div>

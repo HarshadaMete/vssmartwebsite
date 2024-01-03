@@ -166,11 +166,21 @@ const Subcategory = () => {
       SetFromidx(Fromidx + 12);
       SetIndex(Index + 12);
       Setpages(pages + 1);
+      const element = document.getElementById("section-1");
+      if (element) {
+          //  Will scroll smoothly to the top of the next section
+          element.scrollIntoView({ behavior: "smooth" });
+      }
     }
     function Previoupage() {
       SetFromidx(Fromidx - 12);
       SetIndex(Index - 12);
       Setpages(pages - 1);
+      const element = document.getElementById("section-1");
+      if (element) {
+          //  Will scroll smoothly to the top of the next section
+          element.scrollIntoView({ behavior: "smooth" });
+      }
     }
     return (
         <>
@@ -214,7 +224,7 @@ const Subcategory = () => {
 
 
             {/* filter-by-price */}
-            <div className='container-fluid shop-con2'>
+            <div className='container-fluid shop-con2' id='section-1'>
                 <div className='row'>
                     <div className='col-lg-3 col-md-6 col-sm-12'>
                         <div className="card ms-5 mt-4" style={{ width: '18rem' }}>
