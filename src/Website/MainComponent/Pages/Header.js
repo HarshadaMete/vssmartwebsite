@@ -381,7 +381,7 @@ const Header = () => {
                             <li><Link to='/shop' className='nav-link active ms-3  nav-three-link'>Shop</Link></li>
                             <li><Link to='/about' className='nav-link active ms-3  nav-three-link'>About</Link></li>
                             <li><Link to='/bank' className='nav-link active ms-3  nav-three-link'>Bankiing Details</Link></li>
-                            <li><Link to='/' className='nav-link active ms-3  nav-three-link'>Download</Link></li>
+                            <li><Link to='/download' className='nav-link active ms-3  nav-three-link'>Download</Link></li>
                             <li><Link to='/' className='nav-link active ms-3  nav-three-link'>Legal</Link></li>
                             <li><Link to='/' className='nav-link active ms-3  nav-three-link'>Blog</Link></li>
                             <li><i class="fa-solid fa-mobile-screen-button mobile-icon"></i></li>

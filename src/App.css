@@ -1349,3 +1349,11 @@ navbar-second
   color: #ffffff;
   font-weight: bold;
 }
+/* download */
+.download-btn{
+  border: 2px solid #11823b;
+  font-weight: bold;
+  width: 240px;
+  height: 40px;
+  border-radius: 7px;
+}
