@@ -19,6 +19,7 @@ import Checkout from './Website/MainComponent/Pages/Checkout';
 import Myorder from './Website/MainComponent/Pages/Myorder';
 import BankDetail from './Website/MainComponent/Pages/BankDetail';
 import Download from './Website/MainComponent/Pages/Download';
+import Blog from './Website/MainComponent/Pages/Blog';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
       <Route path='/myorder' element={<Master Comp={Myorder}></Master>}></Route>
       <Route path='/bank' element={<Master Comp={BankDetail}></Master>}></Route>
       <Route path='/download' element={<Master Comp={Download}></Master>}></Route>
+      <Route path='/blog' element={<Master Comp={Blog}></Master>}></Route>
      </Routes>
      </BrowserRouter>
     </>
