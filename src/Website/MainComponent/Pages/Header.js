@@ -3,30 +3,30 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import Authuser from '../Authentication/Authuser';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Button, Collapse, Dropdown } from 'react-bootstrap';
 
 // import { Dropdown } from "react-bootstrap";
 const Header = () => {
     const [searchQuery, setSearchQuery] = useState('');
-    
+
     const handleInputChange = event => {
         setSearchQuery(event.target.value);
     };
     const location = useLocation();
     const [searchParams, setSearchParams] = useSearchParams(location.search); // Use useSearchParams
-   
+
     const query = searchParams.get('query');
     const [Product, setProduct] = useState([]);
     const handleSearch = () => {
-        
+
         const filteredRecords = Product.filter(record =>
             record.english_name.toLowerCase().includes(query.toLowerCase())
         );
         console.log(filteredRecords);
-    
+
         setProduct(filteredRecords);
     };
-    useEffect(() => { 
+    useEffect(() => {
         handleSearch();
     }, [searchQuery]);
 
@@ -184,7 +184,7 @@ const Header = () => {
         setIsActive(!isActive);
     };
 
-
+    const [open, setOpen] = useState(true);
     return (
         <>
 
@@ -229,13 +229,13 @@ const Header = () => {
                             </button>
                             {/* Display search results */}
                             <ul>
-                            { Product.map((search)=>(
+                                {Product.map((search) => (
                                     <li key={search.product_id}>{search.english_name}</li>
                                 ))}
                             </ul>
                         </div>
                     </div>
-                    <div className="col-lg-3 col-md-4 col-sm-4 text-end d-flex mt-4">
+                    <div className="col-lg-3 col-md-3 col-sm-4 text-end d-flex mt-4">
                         <div className='nav-sec-icon-div1'><i className="fa-solid fa-wallet nav-sec-icon1"></i></div>
                         <Link to='/login' className="position-relative">
                             <div className='nav-sec-icon-div1 ms-2'><i className="fa-solid fa-code-compare nav-sec-icon1"></i></div>
@@ -316,80 +316,91 @@ const Header = () => {
             {/* navbar-third */}
             <div className="container-fluid">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
-                    </button>
-                    <div className="collapse navbar-collapse container-fluid" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link className="nav-link active home-link nav-three-link" aria-current="page" to="/">Home</Link>
-                            </li>
-                            <li className="navbar-item dropdown-megamenu">
-                                <Link to="/" style={{ color: 'black', fontWeight: 'bold' }} className="nav-item nav-link text-black" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                                    Categories
-                                </Link>
-                                <Dropdown show={showMegaMenu} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                                    <Dropdown.Menu className="mega-menu" style={{ height: 'auto', width: '1000px', marginLeft: '70px' }}>
-                                        <div className="row">
-                                            {Category.slice(0, 8).map((category) => (
-                                                <div className="col-sm-3" >
-                                                    <a href="">
-                                                        <h5 className='font-weight-bold text-primary'>{category.category_name}</h5>
-                                                    </a>
-                                                    <a href="" key={category.category_id}>
-                                                        <ul>
-                                                            {SubCategory.filter((subcategory) => subcategory.subcategory_category_id === category.category_id).
-                                                                slice(0, 5).map(subcategory => (
+                    </button> */}
+                    <Button
+                        className="navbar-toggler"
+                        type="button"
+                        onClick={() => setOpen(!open)}
+                        aria-controls="example-collapse-text"
+                        aria-expanded={open}
+                    >
+                        <span className="navbar-toggler-icon" />
+                    </Button>
+                    <Collapse in={open}>
+                        <div className="collapse navbar-collapse container-fluid" id="example-collapse-text">
+                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li className="nav-item">
+                                    <Link className="nav-link active home-link nav-three-link" aria-current="page" to="/">Home</Link>
+                                </li>
+                                <li className="navbar-item dropdown-megamenu">
+                                    <Link to="/" style={{ color: 'black', fontWeight: 'bold' }} className="nav-item nav-link text-black" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                                        Categories
+                                    </Link>
+                                    <Dropdown show={showMegaMenu} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                                        <Dropdown.Menu className="mega-menu" style={{ height: 'auto', width: '1000px', marginLeft: '70px' }}>
+                                            <div className="row">
+                                                {Category.slice(0, 8).map((category) => (
+                                                    <div className="col-sm-3" >
+                                                        <a href="">
+                                                            <h5 className='font-weight-bold text-primary'>{category.category_name}</h5>
+                                                        </a>
+                                                        <a href="" key={category.category_id}>
+                                                            <ul>
+                                                                {SubCategory.filter((subcategory) => subcategory.subcategory_category_id === category.category_id).
+                                                                    slice(0, 5).map(subcategory => (
 
-                                                                    <li>
-                                                                        <Link className='text-black t' to={`/product-shop/${category.category_id}/${subcategory.subcategory_id}`}
-                                                                            style={{ textDecoration: "none" }}>
-                                                                            {subcategory.subcategory_name}
-                                                                        </Link>
-                                                                    </li>
-                                                                ))}
-                                                        </ul>
-                                                    </a>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </li>
-                            <li className="navbar-item dropdown-megamenu">
-                                <Link to="/shopping" style={{ color: 'black', fontWeight: 'bold' }} className="nav-item nav-link" onMouseEnter={handleMouseEnter2} onMouseLeave={handleMouseLeave2}>
-                                    Brand
-                                </Link>
-                                <Dropdown show={showMegaMenu2} onMouseEnter={handleMouseEnter2} onMouseLeave={handleMouseLeave2}>
-                                    <Dropdown.Menu className="mega-menu" style={{ height: 'auto', width: '1000px', marginLeft: '-220px' }}>
-                                        <div className='row'>
-                                            {Brands.slice(0, 16).map((brand) => (
-                                                <div className='col-lg-6 col-md-6 col-sm-12'>
-                                                    <li key={brand.id}>
-                                                        <Link to={`/product-shop/${brand.brand_id}`} className="dropdown-item text-primary drop-head">{brand.brand_name}</Link>
-                                                    </li>
-                                                </div>
-                                            ))}
-                                            <div className='shop-show-btn-div mt-5'>
-                                                <button type="button" class="btn btn-outline-success shop-show-btn"><i class="fa-solid fa-eye p-2"></i>VIEW ALL BRANDS</button>
+                                                                        <li>
+                                                                            <Link className='text-black t' to={`/product-shop/${category.category_id}/${subcategory.subcategory_id}`}
+                                                                                style={{ textDecoration: "none" }}>
+                                                                                {subcategory.subcategory_name}
+                                                                            </Link>
+                                                                        </li>
+                                                                    ))}
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                ))}
                                             </div>
-                                        </div>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </li>
-                            {/* <li><Link href='#' className='nav-link active ms-3  nav-three-link'>Brands</Link></li> */}
-                            <li><Link to='/shop' className='nav-link active ms-3  nav-three-link'>Shop</Link></li>
-                            <li><Link to='/about' className='nav-link active ms-3  nav-three-link'>About</Link></li>
-                            <li><Link to='/bank' className='nav-link active ms-3  nav-three-link'>Bankiing Details</Link></li>
-                            <li><Link to='/download' className='nav-link active ms-3  nav-three-link'>Download</Link></li>
-                            <li><Link to='/' className='nav-link active ms-3  nav-three-link'>Legal</Link></li>
-                            <li><Link to='/' className='nav-link active ms-3  nav-three-link'>Blog</Link></li>
-                            <li><i class="fa-solid fa-mobile-screen-button mobile-icon"></i></li>
-                            <li style={{ marginLeft: '16px' }}>Call Us<br></br><span style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>+91(8446092500)</span></li>
-                            <li style={{ fontSize: '30px', marginLeft: '16px', color: '#11823b' }}><i class="fa-solid fa-at"></i></li>
-                            <li style={{ marginLeft: '16px' }}>Email Us<br></br><span style={{ fontWeight: 'bold', fontSize: '18px' }}>vsmart0932@gmail.com</span></li>
-                        </ul>
-                    </div>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </li>
+                                <li className="navbar-item dropdown-megamenu">
+                                    <Link to="/shopping" style={{ color: 'black', fontWeight: 'bold' }} className="nav-item nav-link" onMouseEnter={handleMouseEnter2} onMouseLeave={handleMouseLeave2}>
+                                        Brand
+                                    </Link>
+                                    <Dropdown show={showMegaMenu2} onMouseEnter={handleMouseEnter2} onMouseLeave={handleMouseLeave2}>
+                                        <Dropdown.Menu className="mega-menu" style={{ height: 'auto', width: '1000px', marginLeft: '-220px' }}>
+                                            <div className='row'>
+                                                {Brands.slice(0, 16).map((brand) => (
+                                                    <div className='col-lg-6 col-md-6 col-sm-12'>
+                                                        <li key={brand.id}>
+                                                            <Link to={`/product-shop/${brand.brand_id}`} className="dropdown-item text-primary drop-head">{brand.brand_name}</Link>
+                                                        </li>
+                                                    </div>
+                                                ))}
+                                                <div className='shop-show-btn-div mt-5'>
+                                                    <button type="button" class="btn btn-outline-success shop-show-btn"><i class="fa-solid fa-eye p-2"></i>VIEW ALL BRANDS</button>
+                                                </div>
+                                            </div>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </li>
+                                
+                                <li><Link to='/shop' className='nav-link active ms-3  nav-three-link'>Shop</Link></li>
+                                <li><Link to='/about' className='nav-link active ms-3  nav-three-link'>About</Link></li>
+                                <li><Link to='/bank' className='nav-link active ms-3  nav-three-link'>Bankiing Details</Link></li>
+                                <li><Link to='/download' className='nav-link active ms-3  nav-three-link'>Download</Link></li>
+                                <li><Link to='/' className='nav-link active ms-3  nav-three-link'>Legal</Link></li>
+                                <li><Link to='/blog' className='nav-link active ms-3  nav-three-link'>Blog</Link></li>
+                                <li><i class="fa-solid fa-mobile-screen-button mobile-icon"></i></li>
+                                <li style={{ marginLeft: '16px' }}>Call Us<br></br><span style={{ color: 'black', fontWeight: 'bold', fontSize: '18px' }}>+91(8446092500)</span></li>
+                                <li style={{ fontSize: '30px', marginLeft: '16px', color: '#11823b' }}><i class="fa-solid fa-at"></i></li>
+                                <li style={{ marginLeft: '16px' }}>Email Us<br></br><span style={{ fontWeight: 'bold', fontSize: '18px' }}>vsmart0932@gmail.com</span></li>
+                            </ul>
+                        </div>
+                    </Collapse>
                 </nav >
             </div>
             {/* navbar-third-end */}

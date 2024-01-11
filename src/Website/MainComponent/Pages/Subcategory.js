@@ -57,8 +57,8 @@ const Subcategory = () => {
 
             console.log(res.data);
             setcategory(res.data.category.data);
-
-            setCategory_(res.data.category_)
+t
+            seCategory_(res.data.category_)
 
             setsubcategory_(res.data.subcategory_);
 
